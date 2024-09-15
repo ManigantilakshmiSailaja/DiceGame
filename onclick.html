@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding:0px;
+            margin:0px;
+            align-items: center;
+            height:100vh;
+        }
+        .container{
+            display: flex;
+            margin: 200px;
+            flex-wrap: wrap;
+            flex-direction: column;
+            background-color: aqua;
+            height:600px;
+            width: 600px;
+            border-radius: 20px;
+        }
+        .btn1{
+             background-color: crimson;
+             height: 50px;
+             width:150px;
+             border-radius: 15px;
+             border: none;
+             box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+             cursor:pointer;
+             }
+        .btn2{
+             background-color:blue;
+             height: 50px;
+             width:150px;
+             border-radius: 15px;
+             border: none;
+             box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+             cursor:pointer;
+             margin-left: 20px;
+        }
+        h2{
+            text-align: center;
+            font-size: 32px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .btn{
+             margin-top: 60px;
+             height:70px;
+             padding:10px 20px;
+        }
+        .winner{
+            font-size: 30px;
+            color:lightslategrey;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h2>Dice Game</h2>
+     
+        <center>
+        <div class="button">
+        <button class="btn1" onclick="b1()">Player1</button>
+        <h2 id="result1"></h2>
+        <button class="btn2" onclick="b2()">Player2</button>
+        <h2 id="result2"></h2>
+     </div>
+     </center>
+    <center>
+        <div class="btn">
+            <button style="background-color: darkgreen; color:white; border-radius:16px; height:40px; width:90px" onclick="play()">Play</button>
+            <button style="background-color: brown; color:white; border-radius:16px; height:40px; width:90px" onclick="rest()">Reset</button>
+         </div>
+         <h3 id="winner"></h3>
+    </center>
+    </div>
+    
+    <script>
+        let dice1 = 0;
+        let dice2 = 0;
+       
+        function b1() {
+            dice1 = Math.ceil(Math.random() * 6);
+            let result1 = document.getElementById("result1");
+            result1.textContent = "Player1: " + dice1;
+        }
+        function b2() {
+            dice2 = Math.ceil(Math.random() * 6);
+            let result2 = document.getElementById("result2");
+            result2.textContent = "Player2: " + dice2;
+        }
+        function play() {
+            if (dice1 === 0 || dice2 === 0) {
+               let winner= document.getElementById('winner')
+               winner.textContent = "Both players need to roll the dice!";
+            } else {
+                checkWinner();
+            }
+        }
+
+        function checkWinner() {
+            let winner = document.getElementById('winner');
+            if (dice1 > dice2) {
+                winner.textContent = "Player 1 wins!";
+            } else if (dice2 > dice1) {
+                winner.textContent = "Player 2 wins!";
+            } else {
+                winner.textContent = "It's a tie!";
+            }
+        }
+        function rest() {
+            dice1 = 0;
+            dice2 = 0;
+            let result1 = document.getElementById('result1');
+            result1.textContent = "Player1: 0";
+            let result2 = document.getElementById('result2');
+            result2.textContent = "Player2: 0";
+            let winner = document.getElementById('winner');
+            winner.textContent = "";
+        }
+    </script>
+</body>
+</html>
